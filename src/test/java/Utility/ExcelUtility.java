@@ -1,4 +1,4 @@
-package Utilities;
+package Utility;
 
 import io.cucumber.java.Scenario;
 import org.apache.poi.ss.usermodel.*;
@@ -15,6 +15,7 @@ public class ExcelUtility {
 
 
     public static ArrayList<ArrayList<String>> getData(String path, String sheetName, int sutunSayisi){
+
         ArrayList<ArrayList<String>> tablo=new ArrayList<>();
 
         Sheet sheet=null;
@@ -53,6 +54,7 @@ public class ExcelUtility {
             Row yeniSatir = sheet.createRow(0);
 
             Cell hucre = yeniSatir.createCell(0);
+
             hucre.setCellValue(senaryo.getName());
 
             Cell hucre2 = yeniSatir.createCell(1);
@@ -67,7 +69,8 @@ public class ExcelUtility {
             } catch (Exception ex) {
                 System.out.println("ex.getMessage() = " + ex.getMessage());
             }
-        } else {
+        }
+        else {
 
             FileInputStream inputStream=null;
             Workbook workbook=null;

@@ -8,4 +8,6 @@ import io.cucumber.testng.CucumberOptions;
         glue = {"StepDefinitions"} // Step definitions ın klasörü yazılıyor.
 )
 public class _01_TestRunner extends AbstractTestNGCucumberTests {
+
+
 }

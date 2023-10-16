@@ -1,7 +1,7 @@
 package StepDefinitions;
 
-import Utilities.ExcelUtility;
-import Utilities.GWD;
+import Utility.ExcelUtility;
+import Utility.TestDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -24,14 +24,14 @@ public class Hooks {
 
         // extent reportun plugini aktif iken açık kalsın
         if (senaryo.isFailed()){
-            TakesScreenshot ts=((TakesScreenshot) GWD.getDriver());
+            TakesScreenshot ts=((TakesScreenshot) TestDriver.getDriver());
             byte[] hafizadakiHali=ts.getScreenshotAs(OutputType.BYTES);
             senaryo.attach(hafizadakiHali, "image/png", "screenshot name");
         }
 
         //System.out.println("Senaryo bitti ?");
         // doğru çalışırsa burada quiti çağıracağım
-        GWD.quitDriver();
+        TestDriver.quitDriver();
     }
 
 }

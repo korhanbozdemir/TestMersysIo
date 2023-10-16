@@ -9,7 +9,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import java.time.Duration;
 import java.util.Locale;
 
-public class Driver {
+public class TestDriver {
 
     private static ThreadLocal<WebDriver> threadDriver=new ThreadLocal<>();
 
@@ -50,10 +50,8 @@ public class Driver {
         //driver kapat
         if (threadDriver.get()!=null) { //driver var ise
             threadDriver.get().quit();
-
             WebDriver driver= threadDriver.get(); // direk eşitleme yapamadığım için, içindekini al
             driver=null;  // null a eşitle
-
             threadDriver.set(driver); // kendisine null olarak ver, bu hatta bir dolu driver yok
         }
     }
