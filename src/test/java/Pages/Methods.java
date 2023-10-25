@@ -1,6 +1,7 @@
 package Pages;
 
 import Utility.TestDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -14,23 +15,26 @@ import java.time.Duration;
 public class Methods {
 
     public WebDriverWait wait=new WebDriverWait(TestDriver.getDriver(), Duration.ofSeconds(20));
+    //JavascriptExecutor js = (JavascriptExecutor) TestDriver.getDriver();
+    //js.executeScript("arguments[0].value = arguments[1];", element,yazi);
 
     public void myClick(WebElement element){
         wait.until(ExpectedConditions.elementToBeClickable(element));
-        scrollToElement(element);
+        //scrollToElement(element);
         element.click();
     }
 
     public void mySendKeys(WebElement element, String yazi){
         wait.until(ExpectedConditions.visibilityOf(element));
-        scrollToElement(element);
+        //scrollToElement(element);
         element.clear();
         element.sendKeys(yazi);
     }
 
     public void scrollToElement(WebElement element){
         JavascriptExecutor js=(JavascriptExecutor)TestDriver.getDriver();
-        js.executeScript("arguments[0].scrollIntoView();", element);
+        js.executeScript("arguments[0]..scrollIntoView();", element);
+
     }
 
     public void verifyContainsText(WebElement element, String value){
@@ -44,6 +48,14 @@ public class Methods {
         scrollToElement(element);
         JavascriptExecutor js=(JavascriptExecutor)TestDriver.getDriver();
         js.executeScript("arguments[0].click();", element);
+    }
+
+
+    public void waitItem(WebElement element){
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ms-search-button//button")));
+
+
     }
 
 

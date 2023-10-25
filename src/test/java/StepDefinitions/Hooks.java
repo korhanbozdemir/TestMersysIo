@@ -1,6 +1,7 @@
 package StepDefinitions;
 
 import Utility.ExcelUtility;
+import Utility.FakeDataUtility;
 import Utility.TestDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -10,27 +11,24 @@ import org.openqa.selenium.TakesScreenshot;
 
 public class Hooks {
 
-    @Before // Cucumber ın Annotation ı
+    @Before
     public void before()
     {
-       // System.out.println("Senaryo başladı ?");
     }
 
-    @After // Cucumber ın Annotation ı
+    @After
     public void after(Scenario senaryo)
     {
-        ExcelUtility.writeToExcel("src/test/java/ApachePOI/resource/SenaryoSonuclari3.xlsx",
+        ExcelUtility.writeToExcel("src/test/java/ExcelDb/SenaryoSonuclari.xlsx",
                 senaryo);
 
-        // extent reportun plugini aktif iken açık kalsın
+
         if (senaryo.isFailed()){
             TakesScreenshot ts=((TakesScreenshot) TestDriver.getDriver());
             byte[] hafizadakiHali=ts.getScreenshotAs(OutputType.BYTES);
             senaryo.attach(hafizadakiHali, "image/png", "screenshot name");
         }
 
-        //System.out.println("Senaryo bitti ?");
-        // doğru çalışırsa burada quiti çağıracağım
         TestDriver.quitDriver();
     }
 
