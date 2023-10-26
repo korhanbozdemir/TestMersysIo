@@ -14,73 +14,109 @@ public class LeftPanel extends Methods {
     }
 
     @FindBy(xpath="//span[@class='nav-link-title']")
-    private WebElement dashBoard;
+    public WebElement dashBoard;
 
-    @FindBy(xpath="//span[@class='nav-link-title ng-tns-c3380182179-6 ng-star-inserted']")
-    private WebElement setUp;
+    @FindBy(xpath="(//fuse-nav-vertical-collapsable//span[text()='Setup'])[1]")
+    public WebElement setUp;
 
     @FindBy(xpath="//span[@class='nav-link-title ng-star-inserted' and text()='Document Types']")
-    private WebElement setUpParametersDocumentTypes;
+    public WebElement setUpParametersDocumentTypes;
 
     @FindBy(xpath="//span[@class='nav-link-title ng-tns-c3380182179-8 ng-star-inserted']")
-    private WebElement setUpSchoolSetUp;
+    public WebElement setUpSchoolSetUp;
 
     @FindBy(xpath="//[@class='nav-link-title ng-star-inserted'][text()='Locations']")
-    private WebElement setUpSchoolSetUpLocations;
+    public WebElement setUpSchoolSetUpLocations;
 
     @FindBy(xpath="//[@class='nav-link-title ng-star-inserted'][text()='Departments']")
-    private WebElement setUpSchoolSetUpDepartments;
+    public WebElement setUpSchoolSetUpDepartments;
 
-    @FindBy(xpath="//span[@class='nav-link-title ng-tns-c3380182179-7 ng-star-inserted']")
-    private WebElement setUpParameters;
+    @FindBy(xpath="//fuse-nav-vertical-collapsable//span[text()='Parameters']")
+    public WebElement setUpParameters;
 
     @FindBy(xpath="//span[@class='nav-link-title ng-star-inserted' and text()='Bank Accounts']")
-    private WebElement setUpParametersBankAccounts;
+    public WebElement setUpParametersBankAccounts;
 
-    @FindBy(xpath="//span[@class='nav-link-title ng-star-inserted' and text()='Grade Levels']")
-    private WebElement setUpParametersGradeLevels;
+    @FindBy(xpath = "//span[text()='Grade Levels']")
+    public WebElement setUpParametersGradeLevels;
 
     @FindBy(xpath="//span[@class='nav-link-title ng-star-inserted' and text()='Discounts']")
-    private WebElement setUpParametersDiscounts;
+    public WebElement setUpParametersDiscounts;
 
     @FindBy(xpath="//span[@class='nav-link-title ng-star-inserted' and text()='Nationalities']")
-    private WebElement setUpParametersNationalities;
+    public WebElement setUpParametersNationalities;
 
     @FindBy(xpath="//span[@class='nav-link-title ng-tns-c3380182179-9 ng-star-inserted']")
-    private WebElement messaging;
+    public WebElement messaging;
 
     @FindBy(xpath="//span[@class='nav-link-title ng-tns-c3380182179-11 ng-star-inserted']")
-    private WebElement entranceExams;
+    public WebElement entranceExams;
 
     @FindBy(xpath="//span[@class='nav-link-title ng-tns-c3380182179-13 ng-star-inserted']")
-    private WebElement student;
+    public WebElement student;
 
-    @FindBy(xpath="//span[@class='nav-link-title ng-tns-c3380182179-15 ng-star-inserted']")
-    private WebElement humanResources;
+    @FindBy(xpath = "//span[text()='Human Resources']")
+    public WebElement humanResources;
 
-    @FindBy(xpath="//span[@class='nav-link-title ng-tns-c3380182179-16 ng-star-inserted']")
-    private WebElement humanRecourcesSetUp;
+    @FindBy(xpath = "(//span[text()='Setup'])[3]")
+    public WebElement humanRecourcesSetUp;
 
-    @FindBy(xpath="//span[@class='nav-link-title ng-star-inserted' and text()='Positions']")
-    private WebElement humanRecourcesSetUpPositions;
+    @FindBy(xpath = "(//span[text()='Positions'])[1]")
+    public WebElement humanRecourcesSetUpPositions;
 
     @FindBy(xpath="//span[@class='nav-link-title ng-star-inserted' and text()='Attestations']")
-    private WebElement humanRecourcesSetUpAttestations;
+    public WebElement humanRecourcesSetUpAttestations;
 
     @FindBy(xpath="//span[@class='nav-link-title ng-tns-c3380182179-19 ng-star-inserted']")
-    private WebElement inventory;
+    public WebElement inventory;
 
     @FindBy(xpath="//span[@class='nav-link-title ng-tns-c3380182179-21 ng-star-inserted']")
-    private WebElement education;
+    public WebElement education;
 
     @FindBy(xpath="//span[@class='nav-link-title ng-tns-c3380182179-22 ng-star-inserted']")
-    private WebElement educationSetUp;
+    public WebElement educationSetUp;
 
     @FindBy(xpath="//span[@class='nav-link-title ng-star-inserted' and text()='Subject Categories']")
-    private WebElement educationSetUpSubjectCategories;
+    public WebElement educationSetUpSubjectCategories;
 
     @FindBy(xpath="//span[@class='nav-link-title ng-tns-c3380182179-32 ng-star-inserted']")
-    private WebElement incidents;
+    public WebElement incidents;
+
+
+
+
+
+
+
+    public WebElement getWebElement(String strElement){
+        switch (strElement){
+            case "dashBoard": return this.dashBoard;
+            case "setUp": return this.setUp;
+            case "setUpParametersDocumentTypes": return this.setUpParametersDocumentTypes;
+            case "setUpSchoolSetUp": return this.setUpSchoolSetUp;
+            case "setUpSchoolSetUpLocations": return this.setUpSchoolSetUpLocations;
+            case "setUpSchoolSetUpDepartments": return this.setUpSchoolSetUpDepartments;
+            case "setUpParameters": return this.setUpParameters;
+            case "setUpParametersBankAccounts": return this.setUpParametersBankAccounts;
+            case "setUpParametersGradeLevels" : return this.setUpParametersGradeLevels;
+            case "setUpParametersDiscounts" : return this.setUpParametersDiscounts;
+            case "setUpParametersNationalities" : return this.setUpParametersNationalities;
+            case "messaging" : return this.messaging;
+            case "entranceExams" : return this.entranceExams;
+            case "student" : return this.student;
+            case "humanResources" : return this.humanResources;
+            case "humanRecourcesSetUp" : return this.humanRecourcesSetUp;
+            case "humanRecourcesSetUpPositions" : return this.humanRecourcesSetUpPositions;
+            case "humanRecourcesSetUpAttestations" : return this.humanRecourcesSetUpAttestations;
+            case "inventory" : return this.inventory;
+            case "education" : return this.education;
+            case "educationSetUp" : return this.educationSetUp;
+            case "educationSetUpSubjectCategories" : return this.educationSetUpSubjectCategories;
+            case "incidents" : return this.incidents;
+        }
+
+        return null;
+    }
 
 
 }
