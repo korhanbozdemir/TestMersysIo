@@ -15,8 +15,6 @@ import java.time.Duration;
 public class Methods {
 
     public WebDriverWait wait=new WebDriverWait(TestDriver.getDriver(), Duration.ofSeconds(20));
-    //JavascriptExecutor js = (JavascriptExecutor) TestDriver.getDriver();
-    //js.executeScript("arguments[0].value = arguments[1];", element,yazi);
 
     public void myClick(WebElement element){
         wait.until(ExpectedConditions.elementToBeClickable(element));
@@ -53,8 +51,7 @@ public class Methods {
 
     public void waitItem(WebElement element){
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ms-search-button//button")));
-
+        wait.until(ExpectedConditions.elementToBeClickable(element));
 
     }
 

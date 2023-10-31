@@ -1,3 +1,4 @@
+@SmokeTest @Regression
 Feature: Position Category Document Management Functionality
 
 
@@ -6,17 +7,21 @@ Feature: Position Category Document Management Functionality
     And The user enter a valid username and password and clicks to log in button
     Then The user logs in successfully
 
-  Scenario: select Position category
+  Scenario: Select Position category
 
-    Given Click on the position element in LeftNav
-    And The user adds a new position
-    Then The position should be added successfully
+    When The user navigates to Position Category
+      | humanResources      |
+      | humanRecourcesSetUp |
+      | HumanRecourcesSetUpPositionsCat |
 
-    And User should be edit the position
-    Then The position should be edited successfully
+    And The user adds a new position1
+    Then The position should be added successfully1
 
-    And User should be able to delete the position
-    Then The position should be deleted successfully
+    And User should be edit the position1
+    Then The position should be edited successfully1
+
+    And User should be able to delete the position1
+    Then The position should be deleted successfully1
 
 
 

@@ -1,71 +1,55 @@
 package StepDefinitions;
 
-import Pages.LeftPanelE;
+import Pages.DialogContent;
+import Pages.LeftPanel;
 import Utility.FakeDataUtility;
-import Utility.TestDriver;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class _01_PositionCategoryManagement {
 
-    LeftPanelE dc = new LeftPanelE();
+    LeftPanel lp = new LeftPanel();
+    DialogContent dc = new DialogContent();
 
 
     private String [] fakeDataName;
 
 
-    @Given("Navigate to website")
-    public void navigateToWebsite() {
+    @When("The user navigates to Position Category")
+    public void theUserNavigatesToPositionCategory(DataTable dt) {
 
-        TestDriver.getDriver().get("https://test.mersys.io/");
+        List<String> linkList = dt.asList(String.class);
 
-    }
-
-    @And("The user enter a valid username and password and clicks to log in button")
-    public void TheUserEnterAValidUsernameAndPasswordAndClicksToLogInButton() {
-
-        dc.mySendKeys(dc.userName, "turkeyts");
-        dc.mySendKeys(dc.password, "TechnoStudy123");
-        dc.myClick(dc.signInBtn);
-
-    }
-
-    @Then("The user logs in successfully")
-    public void theUserLogsInSuccessfully() {
-
-        dc.verifyContainsText(dc.dashBoard, "Dashboard");
-
-    }
-
-    @Given("Click on the position element in LeftNav")
-    public void clickOnThePositionElementInLeftNav() {
-
-        dc.myClick(dc.humanResources);
-        dc.myClick(dc.humanRecourcesSetUp);
-        dc.myClick(dc.HumanRecourcesSetUpPositionsCat);
+        for (int i = 0; i < linkList.size(); i++) {
+            WebElement linkWebElement = lp.getWebElement(linkList.get(i));
+            lp.myClick(linkWebElement);
+        }
 
         FakeDataUtility fakedata=new FakeDataUtility();
         fakeDataName=fakedata.FakeDataTable();
-
     }
-    @And("The user adds a new position")
+
+    @And("The user adds a new position1")
     public void theUserAddsANewPosition() {
 
         dc.myClick(dc.positionTargetBtn);
         dc.mySendKeys(dc.positionAddName,fakeDataName[0]);
-        dc.myClick(dc.positionSaveBtn);
-        dc.waitItem(dc.positionSaveBtn);
+        dc.myClick(dc.saveButton);
+        dc.waitItem(dc.searchButton);
 
     }
 
-    @Then("The position should be added successfully")
+    @Then("The position should be added successfully1")
     public void thePositionShouldBeAddedSuccessfully() {
 
         dc.verifyContainsText(dc.successMessage,"success");
     }
 
-    @And("User should be edit the position")
+    @And("User should be edit the position1")
     public void userShouldBeEditThePosition() {
 
         dc.mySendKeys(dc.positionSearchName,fakeDataName[0]);
@@ -78,7 +62,7 @@ public class _01_PositionCategoryManagement {
 
     }
 
-    @Then("The position should be edited successfully")
+    @Then("The position should be edited successfully1")
     public void thePositionShouldBeEditedSuccessfully() {
 
         dc.waitItem(dc.positionSearchBtn);
@@ -88,7 +72,7 @@ public class _01_PositionCategoryManagement {
     }
 
 
-    @And("User should be able to delete the position")
+    @And("User should be able to delete the position1")
     public void userShouldBeAbleToDeleteThePosition() {
 
 
@@ -100,9 +84,11 @@ public class _01_PositionCategoryManagement {
         
     }
 
-    @Then("The position should be deleted successfully")
+    @Then("The position should be deleted successfully1")
     public void thePositionShouldBeDeletedSuccessfully() {
 
         dc.verifyContainsText(dc.successMessage, "deleted");
     }
+
+
 }

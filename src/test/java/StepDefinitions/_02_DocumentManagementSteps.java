@@ -1,10 +1,13 @@
 package StepDefinitions;
 
-import Pages.DialogContentY;
-import Pages.LeftPanelY;
-import Utility.TestDriver;
+import Pages.DialogContent;
+import Pages.LeftPanel;
 import com.github.javafaker.Faker;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 
 public class _02_DocumentManagementSteps {
@@ -15,96 +18,91 @@ public class _02_DocumentManagementSteps {
     String fakeName=faker.name().firstName();
 
 
-    DialogContentY dc=new DialogContentY();
-    LeftPanelY ln=new LeftPanelY();
-    @Given("Navigate to Campus")
-    public void navigate_to_campus() {
+    DialogContent dc=new DialogContent();
+    LeftPanel lp=new LeftPanel();
 
-        TestDriver.getDriver().get("https://test.mersys.io/");
 
-    }
+    @And("Navigate to  Attestations")
+    public void navigateToAttestations(DataTable dt) {
+            List<String> stringList=dt.asList(String.class);
 
-    @When("Enter username as {string} and password as {string} and click login button")
-    public void enterUsernameAsAndPasswordAsAndClickLoginButton(String userName, String password) {
-        dc.mySendKeys(dc.usernameY,userName);
-        dc.mySendKeys(dc.passwordY,password);
-        dc.myClick(dc.loginButtonY);
-
-    }
-
-    @Then("Navigate to  Attestations")
-    public void navigateToAttestations() {
-
-        ln.myClick(ln.humanResourcesY);
-        ln.myClick(ln.humanRecourcesSetUpY);
-        ln.myClick(ln.attestationsY);
-        dc.myClick(dc.uyariMsgY);
-
+            for (int i = 0; i <stringList.size() ; i++) {
+                WebElement linkWebElement=lp.getWebElement(stringList.get(i));
+                lp.myClick(linkWebElement);
+            }
+        dc.myClick(dc.uyariMsg);
     }
 
     @And("Create a attestations")
     public void createAAttestations() {
 
-        dc.myClick(dc.addButtonY);
-        dc.mySendKeys(dc.nameInputY,name);
-        dc.myClick(dc.saveButtonY);
+        dc.myClick(dc.addButton);
+        dc.mySendKeys(dc.nameInput,name);
+        dc.myClick(dc.saveButton);
+        dc.waitItem(dc.searchButton);
     }
 
     @And("Success message should be displayed")
     public void successMessageShouldBeDisplayed() {
-        dc.verifyContainsText(dc.successMessageY,"success");
+        dc.verifyContainsText(dc.successMessage,"success");
     }
 
     @When("Document editing")
     public void documentEditing() {
-        dc.mySendKeys(dc.searchInputY,name);
-        dc.myClick(dc.searchButtonY);
-        dc.waitItem(dc.editButtonY);
-        dc.myClick(dc.editButtonY);
-        dc.mySendKeys(dc.nameInputY,editName);
-        dc.myClick(dc.saveButtonY);
-        dc.verifyContainsText(dc.successMessageY,"success");
+        dc.mySendKeys(dc.nameSearch,name);
+        dc.myClick(dc.searchButton);
+        dc.waitItem(dc.searchButton);
+        dc.myClick(dc.editButton);
+        dc.mySendKeys(dc.nameInput,editName);
+        dc.myClick(dc.saveButton);
+        dc.waitItem(dc.searchButton);
+        dc.verifyContainsText(dc.successMessage,"success");
     }
 
     @When("Delete documents")
     public void deleteDocuments() {
-        dc.mySendKeys(dc.searchInputY,editName);
-        dc.myClick(dc.searchButtonY);
-        dc.waitItem(dc.deleteImageBtnY);
-        dc.myClick(dc.deleteImageBtnY);
-        dc.myClick(dc.deleteDialogBtnY);
-        dc.verifyContainsText(dc.successMessageY,"success");
-
-
+        dc.mySendKeys(dc.nameSearch,editName);
+        dc.myClick(dc.searchButton);
+        dc.waitItem(dc.searchButton);
+        dc.myClick(dc.deleteImageButton);
+        dc.myClick(dc.deleteDialogButton);
+        dc.waitItem(dc.searchButton);
+        dc.verifyContainsText(dc.successMessage,"success");
 
     }
 
     @When("Create a document with the same data")
     public void createADocumentWithTheSameData() {
-        dc.myClick(dc.addButtonY);
-        dc.mySendKeys(dc.nameInputY,name);
-        dc.myClick(dc.saveButtonY);
-        dc.waitItem(dc.addButtonY);
-        dc.myClick(dc.addButtonY);
-        dc.mySendKeys(dc.nameInputY,name);
-        dc.myClick(dc.saveButtonY);
+
+        dc.waitItem(dc.searchButton);
+        dc.myClick(dc.addButton);
+        dc.mySendKeys(dc.nameInput,name);
+        dc.myClick(dc.saveButton);
+        dc.waitItem(dc.searchButton);
+
+        dc.myClick(dc.searchButton);
+        dc.waitItem(dc.searchButton);
+
+        dc.myClick(dc.addButton);
+        dc.mySendKeys(dc.nameInput,name);
+        dc.myClick(dc.saveButton);
+        dc.waitItem(dc.searchButton);
 
 
     }
 
     @And("Already exists message should be displayed")
     public void alreadyExistsMessageShouldBeDisplayed() {
-        dc.verifyContainsText(dc.alreadyExistsMsgY,"already exists");
-        System.out.println(dc.alreadyExistsMsgY.getText());
+        dc.verifyContainsText(dc.alreadyExistsMsg,"already exists");
     }
 
     @And("Search with incorrect data")
     public void searchWithIncorrectData() {
 
-        dc.mySendKeys(dc.searchInputY,fakeName);
-        dc.myClick(dc.searchButtonY);
-        System.out.println("mesaj yasin almalıyım  "+dc.noDataMsgY.getText());
-        dc.verifyContainsText(dc.noDataMsgY,"There is no data to display");
+        dc.mySendKeys(dc.nameSearch,fakeName);
+        dc.myClick(dc.searchButton);
+        dc.waitItem(dc.searchButton);
+        dc.verifyContainsText(dc.noDataMsg,"There is no data to display");
 
 
     }

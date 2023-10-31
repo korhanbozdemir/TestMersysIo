@@ -1,13 +1,10 @@
+@SmokeTest @Regression
 Feature: Adding New Nationalities under Parameters
 
   Background:
-    Given Navigate to Campus
-    When Enter username and password as "turkeyts" and "TechnoStudy123"
-
-#  Background:
-#    Given Navigate to website
-#    And The user enter a valid username and password and clicks to log in button
-#    Then The user logs in successfully
+    Given Navigate to website
+    And The user enter a valid username and password and clicks to log in button
+    Then The user logs in successfully
 
   Scenario: Add a New Nationality
     When User navigates to nationality

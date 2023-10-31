@@ -1,10 +1,18 @@
+@SmokeTest @Regression
 Feature: Certification management functionality
 
-  Scenario: Certification management positive test
 
-    Given Navigate to Campus
-    When Enter username as "turkeyts" and password as "TechnoStudy123" and click login button
-    Then Navigate to  Attestations
+  Background:
+    Given Navigate to website
+    And The user enter a valid username and password and clicks to log in button
+    Then The user logs in successfully
+
+    And Navigate to  Attestations
+      | humanResources      |
+      | humanRecourcesSetUp |
+      | humanRecourcesSetUpAttestations |
+
+  Scenario: Certification management positive test
 
     And Create a attestations
     And Success message should be displayed
@@ -16,16 +24,8 @@ Feature: Certification management functionality
     Then Success message should be displayed
 
   Scenario: Certification management negative test 1
-    Given Navigate to Campus
-    When Enter username as "turkeyts" and password as "TechnoStudy123" and click login button
-    Then Navigate to  Attestations
     When Create a document with the same data
     And Already exists message should be displayed
 
-
   Scenario: Certification management negative test 2
-
-    Given Navigate to Campus
-    When Enter username as "turkeyts" and password as "TechnoStudy123" and click login button
-    Then Navigate to  Attestations
     And Search with incorrect data

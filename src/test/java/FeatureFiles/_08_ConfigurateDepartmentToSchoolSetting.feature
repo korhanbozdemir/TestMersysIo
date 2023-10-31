@@ -1,3 +1,4 @@
+@SmokeTest @Regression
 Feature: Department Operations
 
   Background:
@@ -7,9 +8,9 @@ Feature: Department Operations
 
   Scenario: Adding, deleting and editing sections by user
     When User navigates to sections
-      | setupButton |
-      | schoolSetupButton |
-      | departmentsButton |
+      | setUp |
+      | setUpSchoolSetUp |
+      | setUpSchoolSetUpDepartments |
 
     And Add departments
     Then It was seen that the section was added

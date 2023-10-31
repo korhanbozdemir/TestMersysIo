@@ -1,15 +1,16 @@
+@SmokeTest @Regression
 Feature: SchoolSetup Functionality
 
   Background:
+    Given Navigate to website
+    And The user enter a valid username and password and clicks to log in button
+    Then The user logs in successfully
 
-    Given Navigate to Campus
-    When Enter username and password and click login button
-    Then User should login successfully
 
     And Navigate to schoolsetup
       | setUp       |
-      | schoolsetup |
-      | locations   |
+      | setUpSchoolSetUp |
+      | setUpSchoolSetUpLocations   |
 
   Scenario: Create a schoolsetup
 

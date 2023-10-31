@@ -1,78 +1,85 @@
 package StepDefinitions;
 
-import Pages.DialogContentY;
-import Pages.LeftPanelY;
+import Pages.DialogContent;
+import Pages.LeftPanel;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.util.List;
+
 public class _11_EditDiscountSteps {
-    DialogContentY dc=new DialogContentY();
-    LeftPanelY ln=new LeftPanelY();
-    @Given("Navigate to discounts")
-    public void navigateToDiscounts() {
-        ln.myClick(ln.setUpY);
-        ln.myClick(ln.setUpParametersY);
-        ln.myClick(ln.setUpParametersDiscountsY);
-        Assert.assertTrue(ln.setUpParametersDiscountsY.isDisplayed());
-        dc.myClick(dc.codeInputY);
-        Assert.assertTrue(dc.codeInputY.isDisplayed());
+    DialogContent dc=new DialogContent();
+    LeftPanel lp=new LeftPanel();
+    @And("Navigate to discounts")
+    public void navigateToDiscounts(DataTable dt) {
+        List<String> stringList=dt.asList(String.class);
+
+        for (int i = 0; i <stringList.size() ; i++) {
+            WebElement linkWebElement=lp.getWebElement(stringList.get(i));
+            lp.myClick(linkWebElement);
+        }
+        Assert.assertTrue(lp.setUpParametersDiscounts.isDisplayed());
+        dc.myClick(dc.codeInput);
+        Assert.assertTrue(dc.codeInput.isDisplayed());
     }
 
     @When("Create a discounts")
     public void createADiscounts() {
-        dc.myClick(dc.addButtonY);
-        dc.mySendKeys(dc.desciriptionInputY,"yasin25");
-        dc.mySendKeys(dc.integrationInputY,"355");
-        dc.mySendKeys(dc.priorityInputY,"755");
-        dc.myClick(dc.integrationInputY);
-        dc.myClick(dc.saveCloseBtnY);
+        dc.myClick(dc.addButton);
+        dc.mySendKeys(dc.desciriptionInput,"yasin25");
+        dc.mySendKeys(dc.integrationInput,"355");
+        dc.mySendKeys(dc.priorityInput,"755");
+        dc.myClick(dc.integrationInput);
+        dc.myClick(dc.saveCloseBtn);
     }
 
     @When("Organize a discount")
     public void organizeADiscount() {
-        dc.mySendKeys(dc.codeInputY,"355");
-        dc.myClick(dc.searchButtonY);
-        dc.waitItem(dc.editButtonY);
-        dc.myClick(dc.editButtonY);
-        dc.mySendKeys(dc.desciriptionInputY,"yasin44");
-        dc.mySendKeys(dc.integrationInputY,"44");
-        dc.mySendKeys(dc.priorityInputY,"44");
-        dc.myClick(dc.integrationInputY);
-        dc.myClick(dc.saveCloseBtnY);
+        dc.mySendKeys(dc.codeInput,"355");
+        dc.myClick(dc.searchButton);
+        dc.waitItem(dc.editButton);
+        dc.myClick(dc.editButton);
+        dc.mySendKeys(dc.desciriptionInput,"yasin44");
+        dc.mySendKeys(dc.integrationInput,"44");
+        dc.mySendKeys(dc.priorityInput,"44");
+        dc.myClick(dc.integrationInput);
+        dc.myClick(dc.saveCloseBtn);
     }
 
     @When("Delete discount")
     public void deleteDiscount() {
-        dc.mySendKeys(dc.codeInputY,"44");
-        dc.myClick(dc.searchButtonY);
-        dc.waitItem(dc.deleteImageBtnY);
-        dc.myClick(dc.deleteImageBtnY);
-        dc.myClick(dc.deleteDialogBtnY);
+        dc.mySendKeys(dc.codeInput,"44");
+        dc.myClick(dc.searchButton);
+        dc.waitItem(dc.deleteImageButton);
+        dc.myClick(dc.deleteImageButton);
+        dc.myClick(dc.deleteDialogButton);
 
     }
 
     @And("Creating a discount with incomplete information")
     public void creatingADiscountWithIncompleteInformation() {
 
-        dc.myClick(dc.addButtonY);
-        dc.mySendKeys(dc.desciriptionInputY,"yasin25");
-        dc.myClick(dc.integrationInputY);
-        dc.mySendKeys(dc.priorityInputY,"755");
+        dc.myClick(dc.addButton);
+        dc.mySendKeys(dc.desciriptionInput,"yasin25");
+        dc.myClick(dc.integrationInput);
+        dc.mySendKeys(dc.priorityInput,"755");
     }
 
     @And("This field is required message should be displayed")
     public void thisFieldIsRequiredMessageShouldBeDisplayed() {
-        dc.verifyContainsText(dc.thisFieldErrorY,"This field is required!");
+        dc.verifyContainsText(dc.thisFieldError,"This field is required!");
     }
 
     @And("Searching for discounts with wrong data")
     public void searchingForDiscountsWithWrongData() {
 
-        dc.mySendKeys(dc.codeInputY,"456");
-        dc.myClick(dc.searchButtonY);
-        dc.verifyContainsText(dc.noDataMsgY,"There is no data to display");
+        dc.mySendKeys(dc.codeInput,"456");
+        dc.myClick(dc.searchButton);
+        dc.verifyContainsText(dc.noDataMsg,"There is no data to display");
 
 
     }

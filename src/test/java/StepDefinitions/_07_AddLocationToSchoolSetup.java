@@ -1,7 +1,7 @@
 package StepDefinitions;
 
-import Pages.aDialogContent;
-import Pages.aLeftPanel;
+import Pages.DialogContent;
+import Pages.LeftPanel;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -10,13 +10,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.awt.*;
 import java.util.List;
 
-public class SchoolStep {
+public class _07_AddLocationToSchoolSetup {
 
-    aDialogContent dc = new aDialogContent();
-    aLeftPanel ln = new aLeftPanel();
+    DialogContent dc=new DialogContent();
+    LeftPanel lp =new LeftPanel();
 
 
     @And("Navigate to schoolsetup")
@@ -24,8 +23,8 @@ public class SchoolStep {
         List<String> stringList=linkler.asList(String.class);
 
         for (int i = 0; i < stringList.size(); i++) {
-            WebElement linkWebElement=ln.getWebElement(stringList.get(i));
-            ln.myClick(linkWebElement);
+            WebElement linkWebElement=lp.getWebElement(stringList.get(i));
+            lp.myClick(linkWebElement);
 
         }
 
@@ -101,12 +100,6 @@ public class SchoolStep {
         dc.myClick(dc.laboratory);
         dc.mySendKeys(dc.capacity, "40");
         dc.myClick(dc.activitySwitch);
-        // for (int i = 1; i < 4; i++) {
-        // robot.keyPress(KeyEvent.VK_TAB);
-        // robot.keyRelease(KeyEvent.VK_TAB);
-        //new Actions(TestDriver.getDriver()).sendKeys(Keys.ESCAPE).build().perform();
-        // dc.myClick(dc.activitySwitch);
-        //}
         dc.myClick(dc.save);
     }
 }

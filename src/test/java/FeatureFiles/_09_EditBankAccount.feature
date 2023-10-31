@@ -1,3 +1,4 @@
+@SmokeTest @Regression
 Feature: Bank Account Edit Functionality
 
   Background:
@@ -6,8 +7,11 @@ Feature: Bank Account Edit Functionality
     Then The user logs in successfully
 
   Scenario: Select bank accounts
+    When Click on the bank accounts
+      | setUp                 |
+      | setUpParameters       |
+      | setUpParametersBankAccounts |
 
-    Given Click on the bank accounts element in LeftNav
     And User should be able to add accounts
     Then The account should be added successfully
 

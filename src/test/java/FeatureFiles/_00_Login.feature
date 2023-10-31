@@ -1,7 +1,10 @@
+@SmokeTest
 Feature: Login Process
 
-  Scenario: Verifing visibility of login page elements
+  Background:
     Given Navigate to website
+
+  Scenario: Verifing visibility of login page elements
     And The user verifies that they are in login page
     And The user verifies the visibility of campus symbol
     And The user verifies the visibility of social media text

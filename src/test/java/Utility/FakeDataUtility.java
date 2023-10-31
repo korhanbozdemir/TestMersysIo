@@ -9,23 +9,20 @@ public class FakeDataUtility {
         Faker faker = new Faker();
         String fakePosition = faker.job().position();
 
-        String[] shortNameSplit = fakePosition.split(" ");//Kelimeleri boşluğa göre ayır
-        String firstChar = shortNameSplit[0].substring(0, 1); //ilk cümlenin ilk harfini al
+        String[] shortNameSplit = fakePosition.split(" ");
+        String firstChar = shortNameSplit[0].substring(0, 1);
         String secondChar = "";
 
-        //String newfakePosition=faker.job().position(); //update için oluşturdum
+
 
         if (shortNameSplit.length > 1) {
-            secondChar = shortNameSplit[1].substring(0, 1);// eğer büyükse 2inci cümleninde ilk harfini alır
+            secondChar = shortNameSplit[1].substring(0, 1);
         } else {
             secondChar = "";
         }
 
 
         String shortName = firstChar + secondChar;
-
-        //System.out.println("newfakePosition = " + newfakePosition);
-
         String[] data = {fakePosition, shortName};
 
         return data;
@@ -37,13 +34,15 @@ public class FakeDataUtility {
         String name =faker.name().firstName();
         String code=Integer.toString(faker.code().hashCode());
         String email=faker.internet().emailAddress();
+        String EdtName=faker.name().firstName();
+        String EdtCode=Integer.toString(faker.code().hashCode());
 
 
 
-        String[] faketablo={name,code,email};
+
+        String[] faketablo={name,code,email,EdtName,EdtCode};
 
         return faketablo;
-
     }
 
 }

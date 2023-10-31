@@ -1,13 +1,10 @@
+@SmokeTest @Regression
 Feature: Human Resources Position
 
   Background:
     Given Navigate to website
     And The user enter a valid username and password and clicks to log in button
     Then The user logs in successfully
-
-#    Given Navigate to Campus
-#    When Write username and password "turkeyts" and "TechnoStudy123" and click login button
-#    Then User should login successfully
 
   Scenario: HR functionality
     When The user navigates to HR

@@ -2,18 +2,15 @@ package StepDefinitions;
 
 import Pages.DialogContent;
 import Pages.LeftPanel;
+import Utility.ExcelUtility;
 import Utility.FakeDataUtility;
-import Utility.TestDriver;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
-import javax.xml.crypto.Data;
+import java.util.ArrayList;
 import java.util.List;
 
 public class _05_CreateHRPosition {
@@ -21,32 +18,8 @@ public class _05_CreateHRPosition {
     DialogContent dc = new DialogContent();
     LeftPanel lp = new LeftPanel();
 
-   private String [] fakeData;
-   private String [] fakeDataUpdate;
-
-
-
-//    @Given("Navigate to Campus")
-//    public void navigateToCampus() {
-//        TestDriver.getDriver().get("https://test.mersys.io/");
-//    }
-//
-//    @When("Write username and password {string} and {string} and click login button")
-//    public void writeUsernameAndPasswordAndAndClickLoginButton(String username, String password) {
-//        dc.mySendKeys(dc.username, username);
-//        dc.mySendKeys(dc.password, password);
-//        dc.myClick(dc.loginButton);
-//
-//    }
-//
-//
-//    @Then("User should login successfully")
-//    public void userShouldLoginSuccessfully() {
-//
-//        dc.verifyContainsText(dc.getWebElement("txtLoginSuccessLogo"), "Techno Study");
-//
-//    }
-
+    private String[] fakeData;
+    private String[] fakeDataUpdate;
 
 
     @When("The user navigates to HR")
@@ -59,18 +32,21 @@ public class _05_CreateHRPosition {
             lp.myClick(linkWebElement);
         }
 
-        FakeDataUtility fakex=new FakeDataUtility(); //Fake Datalarımı FakeDataUtility çağırdım
+        FakeDataUtility fakex = new FakeDataUtility();
         fakeData = fakex.FakeData();
-        fakeDataUpdate=fakex.FakeData();
+        fakeDataUpdate = fakex.FakeData();
     }
 
     @And("The user adds a new position")
     public void theUserAddsANewPosition() {
 
+
         dc.myClick(dc.addButton);
         dc.mySendKeys(dc.positionName, fakeData[0]);
-        dc.mySendKeys(dc.shortName,fakeData[1]);
+        dc.mySendKeys(dc.shortName, fakeData[1]);
         dc.myClick(dc.saveButton);
+        dc.waitItem(dc.searchButton);
+
 
     }
 
@@ -84,13 +60,14 @@ public class _05_CreateHRPosition {
     @And("The user updates an existing position")
     public void theUserUpdatesAnExistingPosition() {
 
-        dc.mySendKeys(dc.nameSearch,fakeData[0]);
+        dc.mySendKeys(dc.nameSearch, fakeData[0]);
         dc.myClick(dc.searchButton);
         dc.waitItem(dc.searchButton);
         dc.myClick(dc.editButton);
-        dc.mySendKeys(dc.positionName,fakeDataUpdate[0]);
-        dc.mySendKeys(dc.shortName,fakeDataUpdate[1]);
+        dc.mySendKeys(dc.positionName, fakeDataUpdate[0]);
+        dc.mySendKeys(dc.shortName, fakeDataUpdate[1]);
         dc.myClick(dc.saveButton);
+        dc.waitItem(dc.searchButton);
 
     }
 
@@ -105,8 +82,9 @@ public class _05_CreateHRPosition {
     public void theUserSearchesForAPosition() {
 
 
-        dc.mySendKeys(dc.nameSearch,fakeDataUpdate[0]);
+        dc.mySendKeys(dc.nameSearch, fakeDataUpdate[0]);
         dc.myClick(dc.searchButton);
+        dc.waitItem(dc.searchButton);
 
 
     }
@@ -114,8 +92,7 @@ public class _05_CreateHRPosition {
     @Then("The system should display the results")
     public void theSystemShouldDisplayTheResults() {
 
-        dc.waitItem(dc.searchButton);
-        Assert.assertEquals(dc.positionNameText.getText(),fakeDataUpdate[0]);
+        Assert.assertEquals(dc.positionNameText.getText(), fakeDataUpdate[0]);
 
 
     }
@@ -123,7 +100,7 @@ public class _05_CreateHRPosition {
     @And("The user chooses to enable or disable a position")
     public void theUserChoosesToEnableOrDisableAPosition() {
 
-        dc.mySendKeys(dc.nameSearch,fakeDataUpdate[0]);
+        dc.mySendKeys(dc.nameSearch, fakeDataUpdate[0]);
         dc.myClick(dc.searchButton);
         dc.waitItem(dc.searchButton);
         dc.myClick(dc.activeInactiveButton);
@@ -141,11 +118,12 @@ public class _05_CreateHRPosition {
     public void theUserDeletesAPosition() {
 
 
-        dc.mySendKeys(dc.nameSearch,fakeDataUpdate[0]);
+        dc.mySendKeys(dc.nameSearch, fakeDataUpdate[0]);
         dc.myClick(dc.searchButton);
         dc.waitItem(dc.searchButton);
         dc.myClick(dc.deleteImageButton);
         dc.myClick(dc.deleteDialogButton);
+        dc.waitItem(dc.searchButton);
 
     }
 
@@ -155,5 +133,6 @@ public class _05_CreateHRPosition {
         dc.verifyContainsText(dc.successMessage, "success");
 
     }
+
 
 }

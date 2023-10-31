@@ -1,29 +1,38 @@
 package StepDefinitions;
 
-import Pages.LeftPanelE;
+import Pages.DialogContent;
+import Pages.LeftPanel;
 import Utility.FakeDataUtility;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class _09_EditBankAccount {
 
-    LeftPanelE dc = new LeftPanelE();
+    DialogContent dc = new DialogContent();
+    LeftPanel lp =new LeftPanel();
     private String [] fakeDataName;
 
-    @Given("Click on the bank accounts element in LeftNav")
-    public void clickOnTheBankAccountsElementInLeftNav() {
+    @When("Click on the bank accounts")
+    public void clickOnTheBankAccounts(DataTable dt) {
 
-        dc.myClick(dc.setUp);
-        dc.myClick(dc.setUpParameters);
-        dc.myClick(dc.setUpParametersBankAccounts);
+        List<String> strLinkList = dt.asList(String.class);
 
+        for (int i = 0; i < strLinkList.size(); i++) {
+            WebElement linkWebElement = lp.getWebElement(strLinkList.get(i));
+            lp.myClick(linkWebElement);
+        }
 
         FakeDataUtility fakedata=new FakeDataUtility();
         fakeDataName=fakedata.FakeDataTable();
 
 
     }
+
 
     @And("User should be able to add accounts")
     public void userShouldBeAbleToAddAccounts() {
@@ -33,8 +42,8 @@ public class _09_EditBankAccount {
         dc.mySendKeys(dc.bnkAcIban,fakeDataName[1]);
         dc.myClick(dc.bnkCurrency);
         dc.myClick(dc.bnkSelectEur);
-        dc.myClick(dc.positionSaveBtn);
-        dc.waitItem(dc.positionSaveBtn);
+        dc.myClick(dc.saveButton);
+        dc.waitItem(dc.searchButton);
     }
 
     @Then("The account should be added successfully")
@@ -48,14 +57,14 @@ public class _09_EditBankAccount {
 
         dc.mySendKeys(dc.positionSearchName,fakeDataName[0]);
         dc.myClick(dc.positionSearchBtn);
-        dc.waitItem(dc.positionSearchBtn);
+        dc.waitItem(dc.searchButton);
         dc.myClick(dc.positionEditBtn);
         dc.mySendKeys(dc.positionAddName,fakeDataName[3]);
-        dc.mySendKeys(dc.bnkAcIban,fakeDataName[4]); // yeni bir fake iban
+        dc.mySendKeys(dc.bnkAcIban,fakeDataName[4]);
         dc.myClick(dc.bnkSelectEur);
         dc.myClick(dc.bnkSelectTRY);
         dc.myClick(dc.editSaveBtn);
-        dc.waitItem(dc.positionSearchBtn);
+        dc.waitItem(dc.searchButton);
 
     }
 
@@ -72,7 +81,7 @@ public class _09_EditBankAccount {
 
         dc.mySendKeys(dc.positionSearchName,fakeDataName[3]);
         dc.myClick(dc.positionSearchBtn);
-        dc.waitItem(dc.positionSearchBtn);
+        dc.waitItem(dc.searchButton);
         dc.myClick(dc.deleteItemBtn);
         dc.myClick(dc.deleteDialogBtn);
 
@@ -84,8 +93,6 @@ public class _09_EditBankAccount {
         dc.verifyContainsText(dc.successMessage, "deleted");
 
     }
-//
-//    }
 
 
 }

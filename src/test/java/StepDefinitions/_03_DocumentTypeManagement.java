@@ -1,11 +1,10 @@
 package StepDefinitions;
 
-import Pages.aDialogContent;
-import Pages.aLeftPanel;
+import Pages.DialogContent;
+import Pages.LeftPanel;
 import Utility.TestDriver;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.Keys;
@@ -14,35 +13,19 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
-public class DocumentStep {
-aDialogContent dc=new aDialogContent();
-aLeftPanel ln=new aLeftPanel();
-
-    @Given("Navigate to Campus")
-    public void navigateToCampus() {
-        TestDriver.getDriver().get("https://test.mersys.io/");
-    }
-
-    @When("Enter username and password and click login button")
-    public void enterUsernameAndPasswordAndClickLoginButton() {
-        dc.mySendKeys(dc.username, "turkeyts");
-        dc.mySendKeys(dc.password, "TechnoStudy123");
-        dc.myClick(dc.loginButton);
-    }
-
-    @Then("User should login successfully")
-    public void userShouldLoginSuccessfully() {
-        dc.verifyContainsText(dc.txtTechnoStudy,"Techno Study");
-    }
+public class _03_DocumentTypeManagement {
+    DialogContent dc = new DialogContent();
+    LeftPanel lp=new LeftPanel();
 
 
-    @And("Navigate to docuument")
-    public void navigateToDocuument(DataTable linkler) {
+
+    @And("Navigate to document")
+    public void navigateToDocument(DataTable linkler) {
         List<String> stringList=linkler.asList(String.class);
 
         for (int i = 0; i < stringList.size(); i++) {
-            WebElement linkWebElement=ln.getWebElement(stringList.get(i));
-            ln.myClick(linkWebElement);
+            WebElement linkWebElement=lp.getWebElement(stringList.get(i));
+            lp.myClick(linkWebElement);
         }
 
     }
@@ -60,7 +43,7 @@ aLeftPanel ln=new aLeftPanel();
         new Actions(TestDriver.getDriver()).sendKeys(Keys.ESCAPE).build().perform();
         dc.mySendKeys(dc.Description,mesaj);
         dc.myClick(dc.save);
-        dc.waitItem(dc.save);
+        dc.waitItem(dc.searchButton);
     }
 
     @Then("Click to  amend edit")
@@ -78,7 +61,7 @@ aLeftPanel ln=new aLeftPanel();
         new Actions(TestDriver.getDriver()).sendKeys(Keys.ESCAPE).build().perform();
         dc.Description.clear();
         dc.myClick(dc.save);
-        dc.waitItem(dc.save);
+        dc.waitItem(dc.searchButton);
     }
 
     @Then("Search a name as {string} and click search box and delete")
@@ -88,7 +71,7 @@ aLeftPanel ln=new aLeftPanel();
         dc.waitItem(dc.searchButton);
         dc.myClick(dc.deleteButton);
         dc.myClick(dc.deleteMsg);
-        dc.waitItem(dc.deleteMsg);
+        dc.waitItem(dc.searchButton);
 
     }
 
@@ -110,6 +93,7 @@ aLeftPanel ln=new aLeftPanel();
         dc.myClick(dc.examinaton);
         dc.mySendKeys(dc.Description,"");
         dc.myClick(dc.save);
+        dc.waitItem(dc.searchButton);
 
     }
 
