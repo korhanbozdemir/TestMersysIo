@@ -50,8 +50,8 @@ public class _00_LoginSteps {
 
     @Then("The user sees an error message under input boxes")
     public void theUserSeesAnErrorMessageUnderInputBoxes()  {
-        Assert.assertEquals(dc.emailError.getText(), "E-posta gereklidir");
-        Assert.assertEquals(dc.passwordError.getText(), "Şifre gereklidir");
+       dc.verifyContainsText(dc.emailError, "E-mail is required");
+        dc.verifyContainsText(dc.passwordError, "Password is required");
     }
 
     @And("The user enter an invalid username and password and clicks to log in button")

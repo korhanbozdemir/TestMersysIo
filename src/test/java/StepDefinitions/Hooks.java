@@ -36,7 +36,7 @@ public class Hooks {
 
             String shortName = firstChar + secondChar;
 
-            ExcelUtility.writeToExcel(path,name,code,fakePosition,capacity,shortName);
+          //  ExcelUtility.writeToExcel(path,name,code,fakePosition,capacity,shortName);
     }
 
 
@@ -46,7 +46,7 @@ public class Hooks {
     public void after()
     {
 
-        ExcelUtility.ExcelClean(path,"Sayfa1",5000);
+      //  ExcelUtility.ExcelClean(path,"Sayfa1",5000);
         TestDriver.quitDriver();
     }
 
