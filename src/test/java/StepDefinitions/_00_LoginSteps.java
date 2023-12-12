@@ -71,9 +71,9 @@ public class _00_LoginSteps {
 
         dc.myClick(dc.loginButton);
         dc.usernameBox.clear();
-        dc.mySendKeys(dc.usernameBox, "turkeyts");
+        dc.mySendKeys(dc.usernameBox, "****************");//koşum öncesi doğru username girilmeli
         dc.passwordBox.clear();
-        dc.mySendKeys(dc.passwordBox, "TechnoStudy123");
+        dc.mySendKeys(dc.passwordBox, "****************");//koşum öncesi doğru password girilmeli
         dc.rememberMeCheckBox.click();
         dc.myClick(dc.loginButton);
     }
